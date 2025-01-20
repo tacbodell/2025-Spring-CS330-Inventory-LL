@@ -30,6 +30,7 @@ public class Inventory
         // lhs needs to have items added to it.
         // rhs's size is needed
         // lhs.????(rhs.????)
+	lhs.addItems(rhs.size());
     }
 
     /**
@@ -145,6 +146,27 @@ public class Inventory
 
         // Use the appendNode/add logic from Review 1 as your starting point
         // Once we reach this function... we know that `toAdd` must be stored
+
+        // If adding the first Node
+        if (slots.head == null) {
+            slots.head        = newNode;
+            slots.tail        = newNode;
+            slots.currentSize = 1;
+
+            // Why set newNode to null?
+            newNode = null;
+        }
+
+        // Link the newNode to the end
+        // of the existing list
+        slots.tail.next = newNode;
+
+        // Update tail;
+        slots.tail = slots.tail.next;
+        // tail = newNode;
+
+        // Update the size
+        ++slots.currentSize;
     }
 
     /**
