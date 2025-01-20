@@ -94,7 +94,7 @@ public class Inventory
     public boolean isFull()
     {
         // Replace the next line
-        return false;
+        return this.utilizedSlots() == this.totalSlots();
     }
 
     /**
@@ -118,6 +118,18 @@ public class Inventory
     public ItemStack findMatchingItemStack(ItemStack key)
     {
         // Add the necessary sequential search loop
+	// use ItemStack.equals(rhs) to check if same item
+	
+	LinkedList.Node<ItemStack> iterator = this.slots.head;
+
+	System.out.println("This is the current iterator:");
+	System.out.println(iterator);
+
+	while (iterator != null) {
+		//do something
+		iterator = iterator.next;
+		System.out.println("Iterated through stack 1 time");
+	}
 
         return null;
     }
