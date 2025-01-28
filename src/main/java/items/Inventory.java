@@ -105,7 +105,7 @@ public class Inventory
      */
     public boolean isEmpty()
     {
-        return this.slots.currentSize == 0;
+        return this.utilizedSlots() == 0;
     }
 
     /**
@@ -123,13 +123,11 @@ public class Inventory
 	
 	LinkedList.Node<ItemStack> iterator = this.slots.head;
 
-	System.out.println("This is the current iterator:");
-	System.out.println(iterator);
-
 	while (iterator != null) {
-		//do something
+		if (key.equals(iterator.data)){
+			return iterator.data;
+		}	
 		iterator = iterator.next;
-		System.out.println("Iterated through stack 1 time");
 	}
 
         return null;
@@ -144,29 +142,15 @@ public class Inventory
     {
         LinkedList.Node<ItemStack> newNode = new LinkedList.Node<>(toAdd);
 
-        // Use the appendNode/add logic from Review 1 as your starting point
-        // Once we reach this function... we know that `toAdd` must be stored
-
-        // If adding the first Node
         if (slots.head == null) {
             slots.head        = newNode;
             slots.tail        = newNode;
             slots.currentSize = 1;
-
-            // Why set newNode to null?
-            newNode = null;
-        }
-
-        // Link the newNode to the end
-        // of the existing list
-        slots.tail.next = newNode;
-
-        // Update tail;
-        slots.tail = slots.tail.next;
-        // tail = newNode;
-
-        // Update the size
-        ++slots.currentSize;
+        } else {
+	 	slots.tail.next = newNode;
+            	slots.tail = slots.tail.next;
+	      	++slots.currentSize;
+	}	
     }
 
     /**
